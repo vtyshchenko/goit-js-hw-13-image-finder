@@ -4,5 +4,7 @@
  */
 
 // Стили для файла с примером HTML-фрагмента
-@import './filter';
-@import './gallery';
+@import './utils/variables';
+@import './base/common';
+@import './layout/form';
+@import './layout/gallery';

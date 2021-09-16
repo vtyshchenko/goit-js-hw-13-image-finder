@@ -1,6 +1,7 @@
 export default function getRefs() {
   return {
     inputRef: document.getElementById('input'),
-    // querySelector('.gallery'),
+    buttonRef: document.querySelector('.btn-show-more'),
+    galleryRef: document.querySelector('.gallery'),
   };
 }

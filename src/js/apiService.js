@@ -1,4 +1,4 @@
-import { error, info } from '../../node_modules/@pnotify/core/dist/PNotify.js';
+import { error } from '../../node_modules/@pnotify/core/dist/PNotify.js';
 
 const BASE_URL = 'https://pixabay.com/api/?image_type=photo&orientation=horizontal';
 const KEY = '23423301-88813f09fe7b27f5f83c66d56';
@@ -9,7 +9,6 @@ async function fetchImages(searchQuery, page, perPage) {
   }
 
   const url = `${BASE_URL}&q=${searchQuery}&page=${page}&per_page=${perPage}&key=${KEY}`;
-  console.log(`~ url`, url);
   const myRequest = new Request(url);
   return await fetch(myRequest).then(getDataFromResponse).catch(onError);
 }
@@ -18,11 +17,6 @@ function getDataFromResponse(response) {
   switch (response.status) {
     case 200:
       return response.json();
-    case 404:
-      info({
-        text: 'Nothing found!',
-      });
-      return Promise.resolve('');
     default:
       throw new Error(`Something went wrong on api server! Response status ${response.status}`);
   }
@@ -30,9 +24,11 @@ function getDataFromResponse(response) {
 
 function onError(err) {
   error({ text: `Something went wrong: ${err}!` });
+  return -1;
 }
 
 export default { fetchImages, onError };
+
 // {
 //   "comments": 78,
 //   "downloads": 63296,

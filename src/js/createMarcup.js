@@ -1,4 +1,4 @@
-import galleryTempl from '../templates/gallery.hbs';
+import { info } from '../../node_modules/@pnotify/core/dist/PNotify.js';
 import imageCardTempl from '../templates/image_card.hbs';
 
 class CreateMarcup {
@@ -7,16 +7,21 @@ class CreateMarcup {
   }
 
   renderMarkup(response) {
-    this.galleryRef.innerHTML = '';
     if (response) {
-      this.galleryRef.innerHTML = this.createMarcup(response);
+      this.galleryRef.innerHTML += this.createMarcup(response);
     }
   }
 
   createMarcup(data) {
-    const images = imageCardTempl(data);
-    console.log(`~ images`, images);
-    // return galleryTempl(images);
+    if (data.hits.length > 0) {
+      const imagesList = imageCardTempl(data.hits);
+      return imagesList;
+    } else {
+      info({
+        text: 'Nothing found!',
+      });
+      return '';
+    }
   }
 }
 

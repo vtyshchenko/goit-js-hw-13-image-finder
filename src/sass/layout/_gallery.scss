@@ -1,0 +1,16 @@
+.photo-card-list {
+  margin-bottom: 30px;
+  margin-left: $margin-left;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
