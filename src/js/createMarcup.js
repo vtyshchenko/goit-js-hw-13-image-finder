@@ -1,4 +1,3 @@
-import { error } from '@pnotify/core';
 import galleryTempl from '../templates/gallery.hbs';
 import imageCardTempl from '../templates/image_card.hbs';
 
@@ -8,23 +7,16 @@ class CreateMarcup {
   }
 
   renderMarkup(response) {
-    //     this.countryInfoRef.innerHTML = '';
-    //     if (response) {
-    //       if (response.length > 10) {
-    //         this.onManyValues();
-    //       } else {
-    //         this.countryInfoRef.innerHTML = this.createMarcup(response);
-    //       }
-    //     }
+    this.galleryRef.innerHTML = '';
+    if (response) {
+      this.galleryRef.innerHTML = this.createMarcup(response);
+    }
   }
 
   createMarcup(data) {
-    //     if (data.length > 1) {
-    //       return countryListTempl(data);
-    //     } else {
-    //       this.countryFilterRef.value = '';
-    //       return countryCardTempl(data[0]);
-    //     }
+    const images = imageCardTempl(data);
+    console.log(`~ images`, images);
+    // return galleryTempl(images);
   }
 }
 
