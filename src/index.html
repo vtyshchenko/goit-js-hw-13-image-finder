@@ -14,13 +14,26 @@
   </head>
   <body>
     <form class="search-form" id="search-form">
-      <input
-        id="input"
-        type="text"
-        name="query"
-        autocomplete="off"
-        placeholder="Search images..."
-      />
+      <div class="toolbar">
+        <input
+          id="input"
+          type="text"
+          name="query"
+          autocomplete="off"
+          placeholder="Search images..."
+        />
+
+        <input
+          class="switch__toggle"
+          type="checkbox"
+          name="theme"
+          id="switch-toggle"
+          checked
+          aria-label="Переключить между тёмной и светлой темой"
+          aria-checked="false"
+        />
+        <label class="switch__label" for="switch-toggle"> Use button "Load more"</label>
+      </div>
       <ul class="gallery"></ul>
       <button class="btn-show-more visually-hidden" type="button">Show more</button>
     </form>

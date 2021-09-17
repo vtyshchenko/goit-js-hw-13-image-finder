@@ -8,5 +8,7 @@ export default function getRefs() {
     menuBtnRef: document.querySelector('.lightbox__button'),
     imageRef: document.querySelector('.lightbox__image'),
     overlayRef: document.querySelector('.lightbox__overlay'),
+
+    switchRef: document.querySelector('.switch__toggle'),
   };
 }

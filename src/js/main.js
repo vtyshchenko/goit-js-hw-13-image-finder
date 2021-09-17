@@ -8,18 +8,26 @@ setNotifySettings();
 
 let debounce = require('lodash.debounce');
 
-const { galleryRef, inputRef, buttonRef, modelWindowRef, menuBtnRef, imageRef, overlayRef } =
-  getRefs();
+const {
+  galleryRef,
+  inputRef,
+  buttonRef,
+  modelWindowRef,
+  menuBtnRef,
+  imageRef,
+  overlayRef,
+  switchRef,
+} = getRefs();
 
-const createMarcup = new CreateMarcup(galleryRef);
 const perPage = 12;
 let page = 1;
 let textSearch = '';
 let galleryItems = [];
 let number = 0;
 
+const createMarcup = new CreateMarcup(galleryRef);
+
 inputRef.addEventListener('input', debounce(onInput, 500));
-buttonRef.addEventListener('click', debounce(onClick, 500));
 
 galleryRef.addEventListener('click', onClickPicture);
 overlayRef.addEventListener('click', onClickOverlay);
@@ -45,11 +53,17 @@ function closeModalForm() {
 }
 
 function renderMarkup(data) {
-  if (data && data.hits.length > 0) {
-    buttonRef.classList.remove('visually-hidden');
+  if (switchRef.checked) {
+    const is_hiiden = buttonRef.classList.contains('visually-hidden');
+    if (is_hiiden && data && data.hits.length > 0) {
+      buttonRef.classList.remove('visually-hidden');
+      buttonRef.addEventListener('click', debounce(onClick, 500));
+    }
   } else {
     buttonRef.classList.add('visually-hidden');
+    buttonRef.removeEventListener('click', debounce(onClick, 500));
   }
+
   createMarcup.renderMarkup(data);
   if (data && data.hits.length > 0) {
     galleryItems = [...galleryItems, ...data.hits];

@@ -1,0 +1,17 @@
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 24px;
+}
+
+.switch__label {
+  margin: 20px 0 20px 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 10px 10px 10px 10px;
+}
+
+.switch__toggle {
+  margin: 20px 5px 20px 20px;
+}
