@@ -1,16 +1,17 @@
 .photo-card-list {
   margin-bottom: 30px;
-  margin-left: $margin-left;
 }
 
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .stats {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-around;
+
+  margin-top: 10px;
 }

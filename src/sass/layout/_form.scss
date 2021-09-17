@@ -1,7 +1,13 @@
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 #input {
   width: $width;
   height: 20px;
-  margin: $margin-else 0 $margin-else $margin-left;
+  margin: $margin-else 0 $margin-else 0;
 }
 
 .btn-show-more {
