@@ -52,6 +52,9 @@ Pixabay API підтримує пагінацію, нехай у відпові�
   "previewHeight": 110,
   "previewURL": "https://cdn.pixabay.com/photo/2016/07/10/21/47/cat-1508613_150.jpg",
   "previewWidth": 150,
+  "webformatURL": "https://pixabay.com/get/35bbf209e13e39d2_640.jpg",
+	"webformatWidth": 640,
+	"webformatHeight": 360,
   "tags": "cat, animal, cat portrait",
   "type": "photo",
   "user": "cocoparisienne",
@@ -72,6 +75,8 @@ Pixabay API підтримує пагінацію, нехай у відпові�
 - `views` - кількість переглядів
 - `comments` - кількість коментарів
 - `downloads` - кількість завантажень
+- `webformatWidth` - width
+- `webformatHeight` - height
 
 ## Форма пошуку
 

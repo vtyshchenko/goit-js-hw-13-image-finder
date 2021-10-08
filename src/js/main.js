@@ -52,18 +52,55 @@ function closeModalForm() {
   window.removeEventListener('keyup', onKeyPress);
 }
 
+function renderOnButtonClick(is_hiiden, data) {
+  if (is_hiiden && data && data.hits.length > 0) {
+    buttonRef.classList.remove('visually-hidden');
+    buttonRef.addEventListener('click', debounce(onClick, 500));
+  }
+  render(data);
+}
+
+function renderOnIntersectionObserverApi(data) {
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5,
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        getNewPage();
+      }
+    });
+  }, options);
+  render(data);
+
+  observer.observe(galleryRef.querySelector('li:last-child'));
+}
+
 function renderMarkup(data) {
+  const is_hiiden = buttonRef.classList.contains('visually-hidden');
+
   if (switchRef.checked) {
-    const is_hiiden = buttonRef.classList.contains('visually-hidden');
-    if (is_hiiden && data && data.hits.length > 0) {
-      buttonRef.classList.remove('visually-hidden');
-      buttonRef.addEventListener('click', debounce(onClick, 500));
-    }
+    renderOnButtonClick(is_hiiden, data);
   } else {
-    buttonRef.classList.add('visually-hidden');
-    buttonRef.removeEventListener('click', debounce(onClick, 500));
+    if (!is_hiiden) {
+      buttonRef.classList.add('visually-hidden');
+      buttonRef.removeEventListener('click', debounce(onClick, 500));
+    }
+
+    renderOnIntersectionObserverApi(data);
   }
 
+  if (galleryItems.length === 0) {
+    if (!is_hiiden) {
+      buttonRef.classList.add('visually-hidden');
+    }
+  }
+}
+
+function render(data) {
   createMarcup.renderMarkup(data);
   if (data && data.hits.length > 0) {
     galleryItems = [...galleryItems, ...data.hits];
@@ -87,16 +124,21 @@ function upload(page) {
   imagesApi.fetchImages(textSearch, page, perPage).then(renderMarkup).catch(imagesApi.onError);
 }
 
+function getNewPage() {
+  page += 1;
+  upload(page);
+}
+
 function onInput(event) {
   galleryRef.innerHTML = '';
+  galleryItems = [];
   page = 1;
   textSearch = event.target.value;
   upload(page);
 }
 
 function onClick() {
-  page += 1;
-  upload(page);
+  getNewPage();
 }
 
 function onClickPicture(event) {
